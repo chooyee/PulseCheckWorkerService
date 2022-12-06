@@ -1,11 +1,12 @@
 ﻿using MongoDB.Driver;
-using PulseCheckWorkerService.Model;
-using PulseCheckWorkerService.Util;
+using Model;
+using Util;
 using Serilog;
 using System.Diagnostics;
 using System.Transactions;
+using PulseCheckWorkerService;
 
-namespace PulseCheckWorkerService.Factory
+namespace Factory
 {
     public class Account
     {

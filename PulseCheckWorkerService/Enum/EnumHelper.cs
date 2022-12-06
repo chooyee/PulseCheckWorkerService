@@ -1,4 +1,4 @@
-﻿namespace PulseCheckWorkerService.Util
+﻿namespace Util
 {
     public struct EnumHelper
     {

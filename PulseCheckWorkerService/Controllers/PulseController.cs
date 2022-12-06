@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PulseCheckWorkerService.Model;
+using Model;
 using System.Security.Claims;
 
 namespace PulseCheckWorkerService.Controllers

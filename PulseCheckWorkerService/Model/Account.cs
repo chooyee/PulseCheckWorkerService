@@ -1,8 +1,8 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
-using PulseCheckWorkerService.Factory.DB;
-using PulseCheckWorkerService.Util;
+using Factory.DB;
+using Util;
 
-namespace PulseCheckWorkerService.Model
+namespace Model
 {
 
     [Table("PulseChecker_Account")]

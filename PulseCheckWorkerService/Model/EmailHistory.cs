@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
-using PulseCheckWorkerService.Factory.DB;
+using Factory.DB;
 
-namespace PulseCheckWorkerService.Model
+namespace Model
 {
     [Table("PulseChecker_EmailHistory")]
     public class EmailHistory:BaseMongo

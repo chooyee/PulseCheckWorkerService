@@ -1,4 +1,6 @@
-﻿namespace PulseCheckWorkerService.Factory.EmailService
+﻿using PulseCheckWorkerService;
+
+namespace Factory.EmailService
 {
     public class EmailService:IDisposable
     {

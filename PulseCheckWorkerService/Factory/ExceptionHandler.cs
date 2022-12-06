@@ -1,9 +1,10 @@
-﻿using PulseCheckWorkerService.Factory.EmailService;
-using PulseCheckWorkerService.Model;
+﻿using Factory.EmailService;
+using Model;
+using PulseCheckWorkerService;
 using Serilog;
 
 
-namespace PulseCheckWorkerService.Factory
+namespace Factory
 {
     public class ExceptionHandler
     {
@@ -71,7 +72,7 @@ namespace PulseCheckWorkerService.Factory
 
         private async static ValueTask<bool> SendEmailFrequencyCheck(string funcName, string exceptionMsg)
         {
-            var emailLogs = await EmailLog.GetLog(funcName);
+            var emailLogs = await EmailLog.GetLog(funcName, exceptionMsg);
             if (!emailLogs.Any()) return true;
 
             var lastLog = emailLogs.First();
@@ -95,7 +96,7 @@ namespace PulseCheckWorkerService.Factory
 
         private async static ValueTask<bool> PulseEmailFrequencyCheck(string funcName, string accountName)
         {
-            var emailLogs = await EmailLog.GetLog(funcName);
+            var emailLogs = await EmailLog.GetLogByAccountName(funcName, accountName);
             if (!emailLogs.Any()) return true;
 
             var lastLog = emailLogs.First();

@@ -1,11 +1,12 @@
 ﻿
 using MongoDB.Bson;
 using MongoDB.Driver;
-using PulseCheckWorkerService.Util;
+using Util;
 using Serilog;
 using System.Diagnostics;
+using PulseCheckWorkerService;
 
-namespace PulseCheckWorkerService.Factory
+namespace Factory
 {
     public class Pulse
     {

@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
-namespace PulseCheckWorkerService.Model
+namespace Model
 {
     public class BaseMongo
     {

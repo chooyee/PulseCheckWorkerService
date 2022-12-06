@@ -1,8 +1,8 @@
-﻿using PulseCheckWorkerService.Factory.DB;
+﻿using Factory.DB;
 using System.Reflection;
 using System.Diagnostics;
 
-namespace PulseCheckWorkerService.Factory
+namespace Factory
 {
     internal static class ReflectionFactory
     {

@@ -1,6 +1,6 @@
 ﻿using Serilog;
 
-namespace PulseCheckWorkerService.Factory
+namespace Factory
 {
     public class LoggerService
     {
@@ -11,7 +11,7 @@ namespace PulseCheckWorkerService.Factory
 
             Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
-            .WriteTo.File(string.Format("{0}/logs/log_{1:yyyy_MM_dd}.txt", LogFolder, DateTime.Today), rollingInterval: RollingInterval.Day)
+            .WriteTo.File(string.Format("{0}/logs/log_.txt", LogFolder), rollingInterval: RollingInterval.Day)
             .WriteTo.Console()
             .CreateLogger();
         }

@@ -1,4 +1,4 @@
-﻿using PulseCheckWorkerService.Factory.EmailService;
+﻿using Factory.EmailService;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 namespace PulseCheckWorkerService
 {

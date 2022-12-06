@@ -3,7 +3,7 @@ using Job;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Hosting.WindowsServices;
 using PulseCheckWorkerService;
-using PulseCheckWorkerService.Factory;
+using Factory;
 using PulseCheckWorkerService.Services;
 
 LoggerService.InitLogService();

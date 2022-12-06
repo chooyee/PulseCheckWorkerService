@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PulseCheckWorkerService.Factory.EmailService;
+using Factory.EmailService;
 
 namespace PulseCheckWorkerService.Controllers
 {

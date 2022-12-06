@@ -1,9 +1,10 @@
 ﻿using MailKit.Net.Smtp;
 using MimeKit;
-using PulseCheckWorkerService.Util;
+using Util;
 using Serilog;
+using PulseCheckWorkerService;
 
-namespace PulseCheckWorkerService.Factory.EmailService
+namespace Factory.EmailService
 {
     public class SmtpEmailService:EmailService
     {
@@ -15,7 +16,7 @@ namespace PulseCheckWorkerService.Factory.EmailService
         }
 
 
-        public bool SendEmail(string smtpIp, List<string> recipients, string subject, string body, List<string> attachments=null, List<string> ccReceipients = null)
+        public bool SendEmail(string smtpIp, List<string> recipients, string subject, string body, List<string>? attachments=null, List<string>? ccReceipients = null)
         {
             try
             {
@@ -89,7 +90,7 @@ namespace PulseCheckWorkerService.Factory.EmailService
             }
         }
 
-        public static bool SendMail(List<string> recipients, string subject, string body, List<string> attachments=null, List<string> ccReceipients = null)
+        public static bool SendMail(List<string> recipients, string subject, string body, List<string>? attachments=null, List<string>? ccReceipients = null)
         {
             try
             {

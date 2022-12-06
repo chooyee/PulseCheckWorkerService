@@ -353,7 +353,7 @@ namespace Factory.DB
             }
         }
 
-        public List<T> Find<T>(string collectionName, FilterDefinition<T> filter, SortDefinition<T> sort = null)
+        public List<T> Find<T>(string collectionName, FilterDefinition<T> filter, SortDefinition<T>? sort = null)
         {
             if (db == null)
                 CreateConnection();

@@ -1,4 +1,5 @@
 ﻿using EasyCronJob.Abstractions;
+using Factory;
 using Serilog;
 
 namespace Job
@@ -27,8 +28,9 @@ namespace Job
             ///Service.Sync.StartSync();
             try
             {
-                // _ = Pulse.Instance.CheckPulse().Result;
-                Log.Debug("Scheduler running!");
+                Log.Debug("Check Pulse running!");
+                _ = Pulse.Instance.CheckPulse().Result;
+                
             }
             catch (Exception ex)
             {

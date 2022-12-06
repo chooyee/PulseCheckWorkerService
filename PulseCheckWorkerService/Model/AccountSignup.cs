@@ -1,4 +1,4 @@
-﻿namespace PulseCheckWorkerService.Model
+﻿namespace Model
 {
     public class AccountSignup
     {

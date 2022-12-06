@@ -1,4 +1,4 @@
-﻿namespace PulseCheckWorkerService.Factory.DB
+﻿namespace Factory.DB
 {
     [AttributeUsage(System.AttributeTargets.Property | AttributeTargets.Class | AttributeTargets.Struct)]
     public class TableAttribute:System.Attribute
