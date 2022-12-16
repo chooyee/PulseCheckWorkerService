@@ -1,9 +1,8 @@
 ﻿namespace Model
 {
-    public class AccountSignup
+    public class AccountSignup:AccountBase
     {
-        public string AccountName { get; set; }
-        public int Frequency { get; set; }
+
 
     }
 }

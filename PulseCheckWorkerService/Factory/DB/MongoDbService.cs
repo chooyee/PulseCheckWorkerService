@@ -1,11 +1,6 @@
-﻿using Cryptolib2;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Factory.DB
 {
@@ -26,7 +21,7 @@ namespace Factory.DB
             DefaultDB = defaultDB;
         }
 
-        public async Task CreateIndexAsync<T>(string collectionName, string indexName)
+        public async ValueTask CreateIndexAsync<T>(string collectionName, string indexName)
         {
             var collection = db.GetCollection<T>(collectionName);
             var indexOptions = new CreateIndexOptions();
@@ -79,7 +74,7 @@ namespace Factory.DB
             return db.ListCollectionNames(options).Any();
         }
 
-        public Boolean InsertOne<T>(string collectionName, T document)
+        public bool InsertOne<T>(string collectionName, T document)
         {
             if (db == null)
                 CreateConnection();
@@ -96,7 +91,7 @@ namespace Factory.DB
             }
         }
 
-        public Boolean InsertMany<T>(string collectionName, List<T> documents)
+        public bool InsertMany<T>(string collectionName, List<T> documents)
         {
             if (db == null)
                 CreateConnection();
@@ -113,45 +108,6 @@ namespace Factory.DB
             }
         }
 
-        public Boolean ReplaceOne<T>(string collectionName, BsonDocument filter, T update, bool upsert = true)
-        {
-            if (db == null)
-                CreateConnection();
-
-            try
-            {
-                var options = new UpdateOptions { IsUpsert = upsert };
-                var collection = db.GetCollection<T>(collectionName);
-                collection.ReplaceOne(filter, update, options);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message, ex.InnerException);
-            }
-
-
-        }
-
-        public Boolean ReplaceOne<T>(string collectionName, FilterDefinition<T> filter, T update, bool upsert = true)
-        {
-            if (db == null)
-                CreateConnection();
-
-            try
-            {
-                var options = new UpdateOptions { IsUpsert = upsert };
-                var collection = db.GetCollection<T>(collectionName);
-                collection.ReplaceOne(filter, update, options);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message, ex.InnerException);
-            }
-
-
-        }
 
         /// <summary>
         /// Update the data
@@ -161,7 +117,7 @@ namespace Factory.DB
         /// <param name="update"></param>
         /// <param name="upsert"></param>
         /// <returns></returns>
-        public Boolean UpdateOne(string collectionName, BsonDocument filter, BsonDocument update, bool upsert = true)
+        public bool UpdateOne(string collectionName, BsonDocument filter, BsonDocument update, bool upsert = true)
         {
             if (db == null)
                 CreateConnection();
@@ -223,29 +179,29 @@ namespace Factory.DB
             }
         }
 
-        public async Task<BsonDocument> FindOneAndUpdateAsync(string collectionName, FilterDefinition<BsonDocument> filter, UpdateDefinition<BsonDocument> update, bool upsert = true)
+        public async ValueTask<T> FindOneAndUpdateAsync<T>(string collectionName, FilterDefinition<T> filter, UpdateDefinition<T> update, bool upsert = true)
         {
             if (db == null)
                 CreateConnection();
 
             try
             {
-                var options = new FindOneAndUpdateOptions<BsonDocument> { IsUpsert = upsert };
-                var collection = db.GetCollection<BsonDocument>(collectionName);
+                var options = new FindOneAndUpdateOptions<T> { IsUpsert = upsert };
+                var collection = db.GetCollection<T>(collectionName);
                 var result = await collection.FindOneAndUpdateAsync(
                                filter,
                                update,
                                options
-                               ).ConfigureAwait(false);
+                               );
                 return result;
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message, ex.InnerException);
+                throw;
             }
         }
 
-        public async Task<UpdateResult> UpdateOneAsync(string collectionName, BsonDocument filter, BsonDocument update, bool upsert = true)
+        public async ValueTask<UpdateResult> UpdateOneAsync(string collectionName, BsonDocument filter, BsonDocument update, bool upsert = true)
         {
             if (db == null)
                 CreateConnection();
@@ -265,7 +221,7 @@ namespace Factory.DB
 
         }
 
-        public async Task<ReplaceOneResult> ReplaceOneAsync<T>(string collectionName, BsonDocument filter, T update, bool upsert = true)
+        public async ValueTask<ReplaceOneResult> ReplaceOneAsync<T>(string collectionName, BsonDocument filter, T update, bool upsert = true)
         {
             if (db == null)
                 CreateConnection();
@@ -285,7 +241,7 @@ namespace Factory.DB
 
         }
 
-        public async Task<T> InsertOneAsync<T>(string collectionName, T document)
+        public async ValueTask<T> InsertOneAsync<T>(string collectionName, T document)
         {
             if (db == null)
                 CreateConnection();
@@ -302,7 +258,7 @@ namespace Factory.DB
             }
         }
 
-        public async Task<Boolean> InsertManyAsync<T>(string collectionName, List<T> documents)
+        public async ValueTask<bool> InsertManyAsync<T>(string collectionName, List<T> documents)
         {
             if (db == null)
                 CreateConnection();
@@ -319,7 +275,7 @@ namespace Factory.DB
             }
         }
 
-        public async Task<Boolean> InsertOneAsync(string collectionName, BsonDocument document)
+        public async ValueTask<bool> InsertOneAsync(string collectionName, BsonDocument document)
         {
             if (db == null)
                 CreateConnection();
@@ -336,7 +292,7 @@ namespace Factory.DB
             }
         }
 
-        public async Task<Boolean> InsertManyAsync(string collectionName, List<BsonDocument> documents)
+        public async ValueTask<bool> InsertManyAsync(string collectionName, List<BsonDocument> documents)
         {
             if (db == null)
                 CreateConnection();
@@ -433,7 +389,7 @@ namespace Factory.DB
             }
         }
 
-        public async Task<List<BsonDocument>> FindAsync(string collectionName, BsonDocument filter)
+        public async ValueTask<List<BsonDocument>> FindAsync(string collectionName, BsonDocument filter)
         {
             if (db == null)
                 CreateConnection();
@@ -445,7 +401,7 @@ namespace Factory.DB
             return list;
         }
 
-        public async Task<List<T>> FindAsync<T>(string collectionName, BsonDocument filter)
+        public async ValueTask<List<T>> FindAsync<T>(string collectionName, BsonDocument filter)
         {
             if (db == null)
                 CreateConnection();
@@ -486,6 +442,30 @@ namespace Factory.DB
                 throw new Exception(ex.Message, ex.InnerException);
             }
         }
+
+        public async ValueTask<long> DeleteOneAsync<T>(string collectionName, FilterDefinition<T> filter)
+        {
+            if (db == null)
+                CreateConnection();
+
+            try
+            {
+                var collection = db.GetCollection<T>(collectionName);
+                var result = await collection.DeleteOneAsync(filter);
+                if (result.IsAcknowledged)
+                {
+                    return result.DeletedCount;
+                }
+                else {
+                    throw new Exception($"Error! result.IsAcknowledged: {result.IsAcknowledged}");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ;
+            }
+        }
+
         public bool DeleteMany<T>(string collectionName, FilterDefinition<T> filter)
         {
             if (db == null)
@@ -506,7 +486,7 @@ namespace Factory.DB
             }
         }
 
-        public Boolean Drop(string collectionName)
+        public bool Drop(string collectionName)
         {
             if (db == null)
                 CreateConnection();
@@ -522,7 +502,7 @@ namespace Factory.DB
             }
         }
 
-        public async Task<bool> DropAsync(string collectionName)
+        public async ValueTask<bool> DropAsync(string collectionName)
         {
             if (db == null)
                 CreateConnection();

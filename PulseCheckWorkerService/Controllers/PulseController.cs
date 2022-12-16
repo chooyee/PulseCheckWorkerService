@@ -33,6 +33,29 @@ namespace PulseCheckWorkerService.Controllers
                 return NotFound();
         }
 
+        [HttpDelete("account/delete/{accountName}")]
+        public async ValueTask<ActionResult<string>> DeleteAccount(string accountName)
+        {
+            var result = await Factory.Account.Instance.DeleteAccount(accountName);           
+            return new JsonResult(result);
+          
+        }
+
+        [HttpPut("account/deactivate/{accountName}")]
+        public async ValueTask<ActionResult<string>> DeactivateAccount(string accountName)
+        {
+            var result = await Factory.Account.Instance.DeactivateAccount(accountName);
+            return new JsonResult(result);
+
+        }
+
+        [HttpPut("account/activate/{accountName}")]
+        public async ValueTask<ActionResult<string>> ActivateAccount(string accountName)
+        {
+            var result = await Factory.Account.Instance.ActivateAccount(accountName);
+            return new JsonResult(result);
+
+        }
         [HttpGet("alive/{accountName}")]
         public async ValueTask<ActionResult<string>> RegisterPulse(string accountName)
         {
