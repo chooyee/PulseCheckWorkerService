@@ -1,4 +1,4 @@
-﻿using PulseCheckWorkerService;
+﻿using Global;
 
 namespace Factory.EmailService
 {

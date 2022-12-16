@@ -1,5 +1,6 @@
 ﻿using MongoDB.Driver;
 using PulseCheckWorkerService;
+using Global;
 
 namespace Factory
 {

@@ -3,8 +3,7 @@ using Model;
 using Util;
 using Serilog;
 using System.Diagnostics;
-using System.Transactions;
-using PulseCheckWorkerService;
+using Global;
 
 namespace Factory
 {

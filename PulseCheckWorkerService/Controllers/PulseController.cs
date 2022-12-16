@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Factory;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 using System.Security.Claims;
@@ -13,6 +14,14 @@ namespace PulseCheckWorkerService.Controllers
         public ActionResult<string> IAmAlive()
         {           
             return Ok($"I am Alive");
+
+        }
+
+        [HttpGet("Housekeep")]
+        public ActionResult<string> HousekeepDB()
+        {
+            var result = Housekeep.CleanPulseHistory();
+            return new JsonResult(result);
 
         }
 

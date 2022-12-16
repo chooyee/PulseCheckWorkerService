@@ -6,6 +6,7 @@ using Serilog;
 using System.Diagnostics;
 using PulseCheckWorkerService;
 using static MongoDB.Bson.Serialization.Serializers.SerializerHelper;
+using Global;
 
 namespace Factory
 {

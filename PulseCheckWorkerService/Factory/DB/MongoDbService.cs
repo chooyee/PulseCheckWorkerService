@@ -1,4 +1,6 @@
-﻿using MongoDB.Bson;
+﻿using Microsoft.AspNetCore.Mvc.Infrastructure;
+using MongoDB.Bson;
+using MongoDB.Bson.IO;
 using MongoDB.Driver;
 
 
@@ -466,7 +468,7 @@ namespace Factory.DB
             }
         }
 
-        public bool DeleteMany<T>(string collectionName, FilterDefinition<T> filter)
+        public long DeleteMany<T>(string collectionName, FilterDefinition<T> filter)
         {
             if (db == null)
                 CreateConnection();
@@ -476,9 +478,13 @@ namespace Factory.DB
                 var collection = db.GetCollection<T>(collectionName);
                 var result = collection.DeleteMany(filter);
                 if (result.IsAcknowledged)
-                    return true;
+                {
+                    return result.DeletedCount;
+                }
                 else
-                    return false;
+                {
+                    return 0;
+                }
             }
             catch (Exception ex)
             {
@@ -527,6 +533,17 @@ namespace Factory.DB
             var aggregate = collection.Aggregate()
                                        .Group<T>(groupBy);
             return aggregate.ToList();
+        }
+
+        public string Compact(string collectionName)
+        {
+            if (db == null)
+                CreateConnection();
+
+            BsonDocument res = new BsonDocument();
+            var command = new BsonDocument { { "compact", collectionName } };
+            var result = db.RunCommand<BsonDocument>(command);
+            return result.ToJson(new JsonWriterSettings { OutputMode = JsonOutputMode.RelaxedExtendedJson });
         }
 
         #region IDisposable Support

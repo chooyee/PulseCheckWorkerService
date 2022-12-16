@@ -2,9 +2,9 @@ using EasyCronJob.Core;
 using Job;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Hosting.WindowsServices;
-using PulseCheckWorkerService;
 using Factory;
 using PulseCheckWorkerService.Services;
+using Global;
 
 LoggerService.InitLogService();
 

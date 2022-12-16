@@ -2,7 +2,7 @@
 using Model;
 using PulseCheckWorkerService;
 using Serilog;
-
+using Global;
 
 namespace Factory
 {

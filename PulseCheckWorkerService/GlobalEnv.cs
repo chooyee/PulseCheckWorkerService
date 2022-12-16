@@ -1,6 +1,6 @@
 ﻿using Factory.EmailService;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
-namespace PulseCheckWorkerService
+namespace Global
 {
     public sealed class GlobalEnv
     {
@@ -30,6 +30,8 @@ namespace PulseCheckWorkerService
         private readonly int emailFreqMinutes = 10;
 
         private readonly string cronJob;
+        private readonly TimeSpan housekeepTime;
+
         public GlobalEnv()
         {          
             env = ConfigurationManager.AppSettings["env"] ?? "uat";
@@ -57,6 +59,7 @@ namespace PulseCheckWorkerService
 
             cronJob = ConfigurationManager.AppSettings[$"cronjob"]?? "*/10 * * * * ";
 
+            housekeepTime = TimeSpan.Parse(ConfigurationManager.AppSettings[$"housekeeptime"] ?? "07:00");
         }
 
 
@@ -76,5 +79,7 @@ namespace PulseCheckWorkerService
         public int EmailFreqMinutes => emailFreqMinutes;
 
         public string CronJob => cronJob;
+
+        public TimeSpan HousekeepTime => housekeepTime;
     }
 }

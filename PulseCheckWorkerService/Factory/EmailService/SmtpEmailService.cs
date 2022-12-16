@@ -2,7 +2,7 @@
 using MimeKit;
 using Util;
 using Serilog;
-using PulseCheckWorkerService;
+using Global;
 
 namespace Factory.EmailService
 {

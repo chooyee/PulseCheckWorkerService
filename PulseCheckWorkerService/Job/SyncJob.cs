@@ -1,5 +1,6 @@
 ﻿using EasyCronJob.Abstractions;
 using Factory;
+using Global;
 using Serilog;
 
 namespace Job
@@ -30,7 +31,12 @@ namespace Job
             {
                 Log.Debug("Check Pulse running!");
                 _ = Pulse.Instance.CheckPulse().Result;
-                
+
+                var housekeepTime = (DateTime.Now.TimeOfDay - GlobalEnv.Instance.HousekeepTime);
+                if ((housekeepTime.TotalMinutes >= 0) && (housekeepTime.TotalMinutes < 6))
+                {
+                    Housekeep.CleanPulseHistory();
+                }
             }
             catch (Exception ex)
             {

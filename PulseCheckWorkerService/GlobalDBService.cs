@@ -3,7 +3,7 @@ using Cryptolib2;
 using MongoDB.Driver.Core.Configuration;
 using Factory.DB;
 
-namespace PulseCheckWorkerService
+namespace Global
 {
     public sealed class GlobalDBService
     {
