@@ -102,7 +102,7 @@ namespace Factory
                         if (timeDiff.TotalMinutes >= (acc.Frequency * 3))
                         {
                             var content = @$"No pulse from {acc.AccountName} more than {timeDiff.TotalMinutes} minutes. Last recorded pulse is {dateCreated}.
-                            <br><table>
+                            <br><table border='1' cellspacing='2'>
                             <tr><td>Path</td><td>{acc.FileName}</td></tr>
                             <tr><td>Path</td><td>{acc.WorkingDirectory}</td></tr>
                             <tr><td>Log Path</td><td>{acc.LogPath}</td></tr>
@@ -110,13 +110,13 @@ namespace Factory
                             await ExceptionHandler.Email(funcName, acc.AccountName, content);
 
                             //Wake up the service
-                            if (!acc.IsProcessRunning())
-                            {
-                                await StartProcess(acc);
-                                var subject = $"{acc.AccountName} started at {string.Format("{0:yyyy-MM-dd hh:mm:ss}", DateTime.Now)}";
-                                var mailContent = $"{acc.AccountName} started at {string.Format("{0:yyyy-MM-dd hh:mm:ss}", DateTime.Now)} {acc.WorkingDirectory}{acc.FileName}";
-                                await ExceptionHandler.Email($"{funcName} : StartProcess", subject, mailContent);
-                            }
+                            //if (!acc.IsProcessRunning())
+                            //{
+                            //    await StartProcess(acc);
+                            //    var subject = $"{acc.AccountName} started at {string.Format("{0:yyyy-MM-dd hh:mm:ss}", DateTime.Now)}";
+                            //    var mailContent = $"{acc.AccountName} started at {string.Format("{0:yyyy-MM-dd hh:mm:ss}", DateTime.Now)} {acc.WorkingDirectory}{acc.FileName}";
+                            //    await ExceptionHandler.Email($"{funcName} : StartProcess", subject, mailContent);
+                            //}
                         }
                     }
                     catch (Exception ex)
